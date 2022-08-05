@@ -1,24 +1,43 @@
 #include <wx/wx.h>
 #include "Header.h"
 
-enum {
-	ID_STATIC = 2001,
-	ID_HELLO
-};
+// Инициализируем приложение
+bool MyDesk::OnInit() {
+	// Создаем главное окно приложения
+	HelloWindow* mainFrame = new HelloWindow();
 
-MyProjectApp::MyProjectApp() {
-}
+	// Показываем его
+	mainFrame->Show(true);
 
-MyProjectApp::~MyProjectApp() {
+	// Запускаем петлю сообщений
+	return true;
 }
 
 HelloWindow::HelloWindow() : wxFrame(nullptr, wxID_ANY, L"Hello World!") {
-	hello = new wxStaticText(this, ID_STATIC, L"", { 100, 50 }, { 250, 20 });
-	helloButton = new wxButton(this, ID_HELLO, L"Hello", { 150, 100 });
+	hello = new wxStaticText(this, wxID_OK, wxT("What"), { 100, 50 }, { 250, 20 });
+	helloButton = new wxButton(this, wxID_OK, wxT("Hello"), { 150, 100 });
 	helloButton->Bind(wxEVT_BUTTON, &HelloWindow::OnClick, this);
+
+	// Создаем меню
+	wxMenu* fileMenu = new wxMenu;
+
+	// Добавляем пункт "About" (о приложении), который должен показывать маленькую помощь
+	wxMenu* helpMenu = new wxMenu;
+	helpMenu->Append(wxID_ABOUT, wxT("&About...\tF1"), wxT("Show about dialog"));
+
+	fileMenu->Append(wxID_EXIT, wxT("E&xit\tAlt-X"), wxT("Quit this program"));
+
+	// Теперь добавляем созданное меню в строку меню...
+	wxMenuBar* menuBar = new wxMenuBar();
+	menuBar->Append(fileMenu, wxT("&File"));
+	menuBar->Append(helpMenu, wxT("&Help"));
+
+	// ... и присоединяем к фрейму
+	SetMenuBar(menuBar);
 }
 
 HelloWindow::~HelloWindow() {
+	//TODO msgbox
 }
 
 void HelloWindow::OnClick(wxCommandEvent& event) {
@@ -26,11 +45,5 @@ void HelloWindow::OnClick(wxCommandEvent& event) {
 	helloButton->Enable(false);
 }
 
-bool MyProjectApp::OnInit() {
-	HelloWindow* mainFrame = new HelloWindow();
-	mainFrame->Show(true);
-	return true;
-}
-
-wxIMPLEMENT_APP(MyProjectApp);
-wxIMPLEMENT_WXWIN_MAIN_CONSOLE;
+IMPLEMENT_APP(MyDesk);
+IMPLEMENT_WXWIN_MAIN_CONSOLE;

@@ -1,9 +1,8 @@
 #pragma once
 
-class MyProjectApp : public wxApp {
+// Основной класс приложения
+class MyDesk : public wxApp {
 public:
-	MyProjectApp();
-	virtual ~MyProjectApp();
 	virtual bool OnInit() override;
 };
 
