@@ -13,6 +13,7 @@ bool MyDesk::OnInit() {
 	return true;
 }
 
+// Конструктор основного окна
 HelloWindow::HelloWindow() : wxFrame(nullptr, wxID_ANY, L"Hello World!") {
 	hello = new wxStaticText(this, wxID_OK, wxT("What"), { 100, 50 }, { 250, 20 });
 	helloButton = new wxButton(this, wxID_OK, wxT("Hello"), { 150, 100 });
@@ -36,14 +37,40 @@ HelloWindow::HelloWindow() : wxFrame(nullptr, wxID_ANY, L"Hello World!") {
 	SetMenuBar(menuBar);
 }
 
+// Деструктор основного окна
 HelloWindow::~HelloWindow() {
-	//TODO msgbox
+	wxString goodbyemsg;
+
+	goodbyemsg.Printf(wxT("See you later!"));
+
+	wxMessageBox(goodbyemsg, wxT("Goodbye"), wxOK | wxICON_ERROR, this);
 }
 
+// Функция вызывающаяся при клике на кнопку
 void HelloWindow::OnClick(wxCommandEvent& event) {
 	hello->SetLabelText(L"Hello World, I want to get off.");
 	helloButton->Enable(false);
 }
+
+// Функция вызывающаяся при клике на О Программе
+void HelloWindow::OnAbout(wxCommandEvent& event) {
+	wxString msg;
+
+	msg.Printf(wxT("Hello and welcome to %s"), wxVERSION_STRING);
+
+	wxMessageBox(msg, wxT("About Minimal"), wxOK | wxICON_INFORMATION, this);
+}
+
+// Функция вызывающаяся при клике на Выход
+void HelloWindow::OnExit(wxCommandEvent& event) {
+	Close();
+}
+
+// Таблица сообщений для HelloWindow
+BEGIN_EVENT_TABLE(HelloWindow, wxFrame)
+EVT_MENU(wxID_ABOUT, HelloWindow::OnAbout)
+EVT_MENU(wxID_EXIT, HelloWindow::OnExit)
+END_EVENT_TABLE()
 
 IMPLEMENT_APP(MyDesk);
 IMPLEMENT_WXWIN_MAIN_CONSOLE;
