@@ -1,23 +1,23 @@
 #pragma once
 
-// Основной класс приложения
+// РћСЃРЅРѕРІРЅРѕР№ РєР»Р°СЃСЃ РїСЂРёР»РѕР¶РµРЅРёСЏ
 class MyDesk : public wxApp {
 public:
 	virtual bool OnInit() override;
 };
 
-// Класс главного окна приложения
+// РљР»Р°СЃСЃ РіР»Р°РІРЅРѕРіРѕ РѕРєРЅР° РїСЂРёР»РѕР¶РµРЅРёСЏ
 class HelloWindow : public wxFrame {
 public:
 	HelloWindow();
 	virtual ~HelloWindow();
 	void OnClick(wxCommandEvent& event);
 
-	// Обработчики сообщений
+	// РћР±СЂР°Р±РѕС‚С‡РёРєРё СЃРѕРѕР±С‰РµРЅРёР№
 	void OnExit(wxCommandEvent& event);
 	void OnAbout(wxCommandEvent& event);
 private:
-	// Этот класс перехватывает сообщения
+	// Р­С‚РѕС‚ РєР»Р°СЃСЃ РїРµСЂРµС…РІР°С‚С‹РІР°РµС‚ СЃРѕРѕР±С‰РµРЅРёСЏ
 	DECLARE_EVENT_TABLE()
 
 	wxStaticText* hello;

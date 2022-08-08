@@ -1,43 +1,43 @@
 #include <wx/wx.h>
 #include "Header.h"
 
-// Инициализируем приложение
+// РРЅРёС†РёР°Р»РёР·РёСЂСѓРµРј РїСЂРёР»РѕР¶РµРЅРёРµ
 bool MyDesk::OnInit() {
-	// Создаем главное окно приложения
+	// РЎРѕР·РґР°РµРј РіР»Р°РІРЅРѕРµ РѕРєРЅРѕ РїСЂРёР»РѕР¶РµРЅРёСЏ
 	HelloWindow* mainFrame = new HelloWindow();
 
-	// Показываем его
+	// РџРѕРєР°Р·С‹РІР°РµРј РµРіРѕ
 	mainFrame->Show(true);
 
-	// Запускаем петлю сообщений
+	// Р—Р°РїСѓСЃРєР°РµРј РїРµС‚Р»СЋ СЃРѕРѕР±С‰РµРЅРёР№
 	return true;
 }
 
-// Конструктор основного окна
+// РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РѕСЃРЅРѕРІРЅРѕРіРѕ РѕРєРЅР°
 HelloWindow::HelloWindow() : wxFrame(nullptr, wxID_ANY, L"Hello World!") {
 	hello = new wxStaticText(this, wxID_OK, wxT("What"), { 100, 50 }, { 250, 20 });
 	helloButton = new wxButton(this, wxID_OK, wxT("Hello"), { 150, 100 });
 	helloButton->Bind(wxEVT_BUTTON, &HelloWindow::OnClick, this);
 
-	// Создаем меню
+	// РЎРѕР·РґР°РµРј РјРµРЅСЋ
 	wxMenu* fileMenu = new wxMenu;
 
-	// Добавляем пункт "About" (о приложении), который должен показывать маленькую помощь
+	// Р”РѕР±Р°РІР»СЏРµРј РїСѓРЅРєС‚ "About" (Рѕ РїСЂРёР»РѕР¶РµРЅРёРё), РєРѕС‚РѕСЂС‹Р№ РґРѕР»Р¶РµРЅ РїРѕРєР°Р·С‹РІР°С‚СЊ РјР°Р»РµРЅСЊРєСѓСЋ РїРѕРјРѕС‰СЊ
 	wxMenu* helpMenu = new wxMenu;
 	helpMenu->Append(wxID_ABOUT, wxT("&About...\tF1"), wxT("Show about dialog"));
 
 	fileMenu->Append(wxID_EXIT, wxT("E&xit\tAlt-X"), wxT("Quit this program"));
 
-	// Теперь добавляем созданное меню в строку меню...
+	// РўРµРїРµСЂСЊ РґРѕР±Р°РІР»СЏРµРј СЃРѕР·РґР°РЅРЅРѕРµ РјРµРЅСЋ РІ СЃС‚СЂРѕРєСѓ РјРµРЅСЋ...
 	wxMenuBar* menuBar = new wxMenuBar();
 	menuBar->Append(fileMenu, wxT("&File"));
 	menuBar->Append(helpMenu, wxT("&Help"));
 
-	// ... и присоединяем к фрейму
+	// ... Рё РїСЂРёСЃРѕРµРґРёРЅСЏРµРј Рє С„СЂРµР№РјСѓ
 	SetMenuBar(menuBar);
 }
 
-// Деструктор основного окна
+// Р”РµСЃС‚СЂСѓРєС‚РѕСЂ РѕСЃРЅРѕРІРЅРѕРіРѕ РѕРєРЅР°
 HelloWindow::~HelloWindow() {
 	wxString goodbyemsg;
 
@@ -46,13 +46,13 @@ HelloWindow::~HelloWindow() {
 	wxMessageBox(goodbyemsg, wxT("Goodbye"), wxOK | wxICON_ERROR, this);
 }
 
-// Функция вызывающаяся при клике на кнопку
+// Р¤СѓРЅРєС†РёСЏ РІС‹Р·С‹РІР°СЋС‰Р°СЏСЃСЏ РїСЂРё РєР»РёРєРµ РЅР° РєРЅРѕРїРєСѓ
 void HelloWindow::OnClick(wxCommandEvent& event) {
 	hello->SetLabelText(L"Hello World, I want to get off.");
 	helloButton->Enable(false);
 }
 
-// Функция вызывающаяся при клике на О Программе
+// Р¤СѓРЅРєС†РёСЏ РІС‹Р·С‹РІР°СЋС‰Р°СЏСЃСЏ РїСЂРё РєР»РёРєРµ РЅР° Рћ РџСЂРѕРіСЂР°РјРјРµ
 void HelloWindow::OnAbout(wxCommandEvent& event) {
 	wxString msg;
 
@@ -61,12 +61,12 @@ void HelloWindow::OnAbout(wxCommandEvent& event) {
 	wxMessageBox(msg, wxT("About Minimal"), wxOK | wxICON_INFORMATION, this);
 }
 
-// Функция вызывающаяся при клике на Выход
+// Р¤СѓРЅРєС†РёСЏ РІС‹Р·С‹РІР°СЋС‰Р°СЏСЃСЏ РїСЂРё РєР»РёРєРµ РЅР° Р’С‹С…РѕРґ
 void HelloWindow::OnExit(wxCommandEvent& event) {
 	Close();
 }
 
-// Таблица сообщений для HelloWindow
+// РўР°Р±Р»РёС†Р° СЃРѕРѕР±С‰РµРЅРёР№ РґР»СЏ HelloWindow
 BEGIN_EVENT_TABLE(HelloWindow, wxFrame)
 EVT_MENU(wxID_ABOUT, HelloWindow::OnAbout)
 EVT_MENU(wxID_EXIT, HelloWindow::OnExit)
@@ -74,3 +74,4 @@ END_EVENT_TABLE()
 
 IMPLEMENT_APP(MyDesk);
 IMPLEMENT_WXWIN_MAIN_CONSOLE;
+// РЅРѕРІС‹Р№
